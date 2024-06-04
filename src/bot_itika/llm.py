@@ -50,7 +50,7 @@ class Llm:
         context = context.replace("\n", "\n")
         self.context = context
         # overwrite the context file
-        with open("context.txt", "w") as f:
+        with open("./src/bot_itika/context.txt", "w") as f:
             f.write(context)
         print(context)
 
