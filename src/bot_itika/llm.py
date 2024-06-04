@@ -16,6 +16,21 @@ First, you must always refer to the context with get_context before responding.
 Also, when a user gives you knowledge related to traP, update the knowledge with update_context by adding to the context retrieved with get_context.
 """
 
+INIT_CONTEXT = """
+{
+  "traP": {
+    "活動内容": "プログラミングやゲーム制作",
+    "所属": "東工大",
+    "利用SNS": {
+        "name: "traQ",
+        "説明": "Discordのような部員専用SNS",
+    },
+    "代表": "takeno_hito",
+    "部員数": 674
+  }
+}
+"""
+
 
 class Llm:
     model_name = "gemini-1.5-pro-latest"
@@ -40,8 +55,13 @@ class Llm:
 
     def get_context(self) -> str:
         """Get context about traP or its surroundings."""
-        with open("context.txt", "r") as f:
-            self.context = f.read()
+        try:
+            with open("/data/context.txt", "r") as f:
+                self.context = f.read()
+        except FileNotFoundError:
+            self.context = INIT_CONTEXT
+            with open("/data/context.txt", "w") as f:
+                f.write(INIT_CONTEXT)
         return self.context
 
     def update_context(self, context: str) -> None:
@@ -50,7 +70,7 @@ class Llm:
         context = context.replace("\n", "\n")
         self.context = context
         # overwrite the context file
-        with open("./src/bot_itika/context.txt", "w") as f:
+        with open("/data/context.txt", "w") as f:
             f.write(context)
         print(context)
 

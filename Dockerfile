@@ -22,6 +22,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH "${PYTHONPATH}:/workspace"
 
+VOLUME /data
+
 COPY . .
 
 CMD ["python", "src/bot_itika/main.py"]
