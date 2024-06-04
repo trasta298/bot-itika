@@ -14,6 +14,30 @@ You should ask me anything about traP. You must speak in Japanese.
 
 First, you must always refer to the context with get_context before responding.
 Also, when a user gives you knowledge related to traP, update the knowledge with update_context by adding to the context retrieved with get_context.
+
+## For example
+get_context:
+```
+{
+    "traP": {
+        "活動内容": "プログラミングやゲーム制作",
+        "所属": "東工大",
+    }
+}
+```
+user: traPの代表はtakeno_hitoです。
+->
+update_context (add to the context):
+```
+{
+    "traP": {
+        "活動内容": "プログラミングやゲーム制作",
+        "所属": "東工大",
+        "代表": "takeno_hito",
+    }
+}
+```
+
 """
 
 INIT_CONTEXT = """
