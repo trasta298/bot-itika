@@ -100,6 +100,6 @@ class Llm:
 
     @retry.Retry(initial=10)
     def send_message(self, message: str) -> str:
-        print(message)
+        print(f"context: {self.context}\nmessage: {message}")
         res = self.convo.send_message(message)
         return res.text
